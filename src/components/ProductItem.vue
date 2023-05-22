@@ -58,9 +58,8 @@
 </template>
 
 <script>
-// import products from '@/data/products';
 
 export default {
-  props: ['products'],
+  props: ['product'],
 };
 </script>
