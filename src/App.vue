@@ -1,6 +1,7 @@
 <template>
   <section class="catalog">
-    <ProductList :products="products"/>
+    <ProductList :products="products">
+    </ProductList>
 
     <BasePagination v-model="page" :count="countProducts" :per-page="productsPerPage"/>
 
@@ -12,9 +13,10 @@ import products from './data/products';
 import ProductList from './components/ProductList.vue';
 import BasePagination from './components/BasePagination.vue';
 
+
 export default {
   name: 'App',
-  components: { ProductList, BasePagination },
+  components: { ProductList, BasePagination},
   data() {
     return {
       page: 1,
