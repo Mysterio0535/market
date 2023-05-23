@@ -70,4 +70,3 @@ export default {
   props: ['product'],
 };
 </script>
-сделай фильтрацию по цветах исходя из єтого кода
