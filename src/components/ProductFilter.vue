@@ -244,7 +244,7 @@
 
 <script>
 import category from '../data/categories';
-import color from '../components/ColorItem.vue';
+import color from '@/components/ColorItem.vue';
 
 export default {
   data() {
@@ -255,7 +255,7 @@ export default {
       selectedColors: [],
     };
   },
-  props: ['priceFrom', 'priceTo', 'categoryId','color'],
+  props: ['priceFrom', 'priceTo', 'categoryId', 'color'],
   computed: {
     colors() {
       return color.value;
@@ -277,14 +277,14 @@ export default {
     },
     colors(value) {
       this.selectedColors = value;
-    }
+    },
   },
   methods: {
     submit() {
       this.$emit('update:priceFrom', this.currentPriceFrom);
       this.$emit('update:priceTo', this.currentPriceTo);
       this.$emit('update:categoryId', this.currentCategoryId);
-      this.$emit('update:colors', this.selectedColors )
+      this.$emit('update:colors', this.selectedColors);
     },
     reset() {
       this.$emit('update:priceFrom', 0);

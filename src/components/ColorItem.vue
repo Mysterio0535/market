@@ -1,8 +1,8 @@
 <template>
   <li class="colors__item">
-    <label class="colors__label form__label--color" >
+    <label class="colors__label form__label--color" for="from__label-color">
       <input
-
+        id="from__label-color"
         class="colors__radio sr-only"
         type="radio"
         value="color"

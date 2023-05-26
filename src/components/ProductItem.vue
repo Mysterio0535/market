@@ -76,11 +76,11 @@ export default {
     };
   },
   methods: {
-   gotoPage
+    gotoPage,
   },
   props: ['product'],
   filters: {
-    numberFormat
+    numberFormat,
   },
 };
 </script>

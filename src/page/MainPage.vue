@@ -35,7 +35,7 @@ import products from '@/data/products';
 import ProductList from '@/components/ProductList.vue';
 import BasePagination from '@/components/BasePagination.vue';
 import ProductFilter from '@/components/ProductFilter.vue';
-import colors from "@/components/ColorItem.vue";
+import colors from '@/components/ColorItem.vue';
 
 export default {
   components: { ProductList, BasePagination, ProductFilter },
@@ -53,7 +53,9 @@ export default {
   computed: {
     filterProducts() {
       let filterProducts = products;
-      { colors: ['#73B6EA', '#FFBE15', '#939393', '#8BE000', '#FF6B00', '#FFF', '#000'] }
+      // {
+      //   colors: ['#73B6EA', '#FFBE15', '#939393', '#8BE000', '#FF6B00', '#FFF', '#000'];
+      // };
       if (this.filterPriceFrom > 0) {
         filterProducts = filterProducts.filter((product) => product.price > this.filterPriceFrom);
       }
@@ -66,9 +68,7 @@ export default {
         filterProducts = filterProducts.filter((product) => product.categoryId === this.filterCategoryId);
       }
       if (colors.length > 0) {
-        filterProducts = filterProducts.filter((product) =>
-          colors.includes(product.color)
-        );
+        filterProducts = filterProducts.filter((product) => colors.includes(product.color));
       }
       return filterProducts;
     },

@@ -189,7 +189,6 @@
                 </button>
 
                 <label for="input">
-                <input type="text" value="1" name="count" id="input">
                 </label>
                 <input type="text" value="1" name="count" id="input">
                 <button type="button" aria-label="Добавить один товар">
@@ -287,18 +286,18 @@ import numberFormat from '@/helpers/numberFormat';
 export default {
   props: ['pageParams'],
   filters: {
-    numberFormat
+    numberFormat,
   },
   computed: {
     product() {
       return products.find(product => product.id === this.pageParams.id);
     },
     category() {
-      return categories.find(category => category.id === this.product.categoryId)
-    }
+      return categories.find(category => category.id === this.product.categoryId);
+    },
   },
   methods: {
-    gotoPage
-  }
+    gotoPage,
+  },
 };
 </script>
