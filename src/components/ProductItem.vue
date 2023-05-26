@@ -1,7 +1,7 @@
 <template>
   <li class="catalog__item">
 
-        <a class="catalog__pic" href="#">
+        <a class="catalog__pic" href="#" @click.prevent="$emit('gotoPage', 'product', { id: product.id } )">
           <img :src="product.image" :alt="product.title" />
         </a>
 
@@ -16,57 +16,63 @@
         </span>
 
         <ul class="colors colors--black">
-
-          <li class="colors__item">
-            <label class="colors__label" for="color-item">
+          <ColorItem v-for="color in product.color"
+        :key="color.id"
+        :color="color"
+        :input-id="'color-' + product.id + '-' + color.id"
+        :selected-color="selectedColor"/>
+        
+          <!-- <li class="colors__item">
+            <label class="colors__label">
               <input
                 class="colors__radio sr-only"
                 type="radio"
                 value="#73B6EA"
                 v-model = "selectedColor"
-                id="color-item"
               />
               <span class="colors__value" style="background-color: #73b6ea"> </span>
             </label>
-          </li>
+          </li> -->
 
-          <li class="colors__item">
-            <label class="colors__label" for="color-radio">
+          <!-- <li class="colors__item">
+            <label class="colors__label">
               <input
                 class="colors__radio sr-only"
                 type="radio"
                 value="#8BE000"
                 v-model = "selectedColor"
-                id="color-radio"
               />
               <span class="colors__value" style="background-color: #8BE000"> </span>
             </label>
           </li>
 
           <li class="colors__item">
-            <label class="colors__label" for="color-radio-sec">
+            <label class="colors__label">
               <input
                 class="colors__radio sr-only"
                 type="radio"
                 value="#222"
                 v-model = "selectedColor"
-                id="color-radio-sec"
               />
               <span class="colors__value" style="background-color: #222"> </span>
             </label>
-          </li>
+          </li> -->
         </ul>
       </li>
 </template>
 
 <script>
+import ColorItem from './ColorItem.vue';
 
 export default {
+  components: {
+    ColorItem,
+  },
   data() {
     return {
-      selectedColor: '#73B6EA',
+      selectedColor: 'selectedColor',
     };
   },
-  props: ['product'],
+  props: ['product']
 };
 </script>
