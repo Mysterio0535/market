@@ -20,7 +20,7 @@
       <section class="catalog">
         <ProductList
         :products="products"
-        @gotoPage="(pageName, pageParams) => $emit('gotoPage', pageName, pageParams)"/>
+        />
 
         <BasePagination v-model="page" :count="countProducts" :per-page="productsPerPage" />
 
@@ -53,6 +53,7 @@ export default {
   computed: {
     filterProducts() {
       let filterProducts = products;
+      { colors: ['#73B6EA', '#FFBE15', '#939393', '#8BE000', '#FF6B00', '#FFF', '#000'] }
       if (this.filterPriceFrom > 0) {
         filterProducts = filterProducts.filter((product) => product.price > this.filterPriceFrom);
       }
@@ -65,11 +66,10 @@ export default {
         filterProducts = filterProducts.filter((product) => product.categoryId === this.filterCategoryId);
       }
       if (colors.length > 0) {
-        filteredProducts = filteredProducts.filter((product) =>
+        filterProducts = filterProducts.filter((product) =>
           colors.includes(product.color)
         );
       }
-
       return filterProducts;
     },
     products() {

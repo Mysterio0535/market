@@ -255,7 +255,7 @@ export default {
       selectedColors: [],
     };
   },
-  props: ['priceFrom', 'priceTo', 'categoryId',],
+  props: ['priceFrom', 'priceTo', 'categoryId','color'],
   computed: {
     colors() {
       return color.value;
@@ -275,6 +275,9 @@ export default {
     categoryId(value) {
       this.currentCategoryId = value;
     },
+    colors(value) {
+      this.selectedColors = value;
+    }
   },
   methods: {
     submit() {
