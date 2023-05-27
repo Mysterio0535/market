@@ -1,9 +1,9 @@
 <template>
   <li class="catalog__item">
 
-        <a class="catalog__pic" href="#" @click.prevent="gotoPage( 'product', { id: product.id } )">
+        <router-link class="catalog__pic" :to="{name: 'ProductPage', params: {id: product.id}}" >
           <img :src="product.image" :alt="product.title" />
-        </a>
+        </router-link>
 
         <h3 class="catalog__title">
           <a href="#">
@@ -62,7 +62,7 @@
 </template>
 
 <script>
-import ColorItem from './ColorItem.vue';
+import ColorItem from '@/components/ColorItem.vue';
 import gotoPage from '@/helpers/gotoPage';
 import numberFormat from '@/helpers/numberFormat';
 

@@ -45,8 +45,8 @@
           <fieldset class="form__block">
             <legend class="form__legend">Цвет</legend>
             <ul class="colors">
-              <li class="colors__item" :for="'color-' + color.id"  v-for="color in colors" :key="color">
-                <label class="colors__label" >
+              <li class="colors__item" v-for="color in colors" :key="color">
+                <label class="colors__label" for="'color-' + color.id">
 
                   <input class="colors__radio sr-only"
                   type="radio"
@@ -244,7 +244,7 @@
 
 <script>
 import category from '../data/categories';
-import color from '@/components/ColorItem.vue';
+// import color from './components/ColorItem.vue';
 
 export default {
   data() {
@@ -255,11 +255,11 @@ export default {
       selectedColors: [],
     };
   },
-  props: ['priceFrom', 'priceTo', 'categoryId', 'color'],
+  props: ['priceFrom', 'priceTo', 'categoryId'],
   computed: {
-    colors() {
-      return color.value;
-    },
+    // colors() {
+    //   return color.value;
+    // },
 
     categories() {
       return category;
@@ -275,16 +275,16 @@ export default {
     categoryId(value) {
       this.currentCategoryId = value;
     },
-    colors(value) {
-      this.selectedColors = value;
-    },
+    // colors(value) {
+    //   this.selectedColors = value;
+    // },
   },
   methods: {
     submit() {
       this.$emit('update:priceFrom', this.currentPriceFrom);
       this.$emit('update:priceTo', this.currentPriceTo);
       this.$emit('update:categoryId', this.currentCategoryId);
-      this.$emit('update:colors', this.selectedColors);
+      // this.$emit('update:colors', this.selectedColors);
     },
     reset() {
       this.$emit('update:priceFrom', 0);

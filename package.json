@@ -9,7 +9,9 @@
   },
   "dependencies": {
     "core-js": "^3.8.3",
-    "vue": "^2.6.14"
+    "vue": "^2.6.14",
+    "vue-router": "^3.6.5",
+    "vuex": "^3.6.2"
   },
   "devDependencies": {
     "@babel/core": "^7.12.16",
@@ -39,7 +41,12 @@
       "parser": "@babel/eslint-parser"
     },
     "rules": {
-      "max-len": ["error", { "code": 120 }]
+      "max-len": [
+        "error",
+        {
+          "code": 120
+        }
+      ]
     }
   },
   "browserslist": [
