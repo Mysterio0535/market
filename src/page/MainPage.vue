@@ -44,7 +44,7 @@ export default {
       filterPriceFrom: 0,
       filterPriceTo: 0,
       filterCategoryId: 0,
-      // filterColorId: '',
+      filterColorId: '',
 
       page: 1,
       productsPerPage: 3,

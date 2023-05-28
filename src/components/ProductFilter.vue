@@ -153,10 +153,10 @@
 
 <script>
 import category from '../data/categories';
-// import color from '../data/color';
 import ColorFilter from './ColorFilter.vue';
 
 export default {
+  name: 'ProductFilter',
   components: { ColorFilter },
   data() {
     return {
@@ -164,14 +164,10 @@ export default {
       currentPriceTo: 0,
       currentCategoryId: 0,
       selectedColors: [],
-      // filterColorId: '',
     };
   },
   props: ['priceFrom', 'priceTo', 'categoryId'],
   computed: {
-    // chosenColors() {
-    //   return color.value;
-    // },
 
     categories() {
       return category;
@@ -187,16 +183,12 @@ export default {
     categoryId(value) {
       this.currentCategoryId = value;
     },
-    // colors(value) {
-    //   this.selectedColors = value;
-    // },
   },
   methods: {
     submit() {
       this.$emit('update:priceFrom', this.currentPriceFrom);
       this.$emit('update:priceTo', this.currentPriceTo);
       this.$emit('update:categoryId', this.currentCategoryId);
-      // this.$emit('update:selectedColors', this.selectedColors);
     },
     reset() {
       this.$emit('update:priceFrom', 0);

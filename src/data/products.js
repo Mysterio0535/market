@@ -6,9 +6,9 @@ export default [
     price: '3690',
     image: '/img/radio.jpg',
     color: [
-      { id: 1, value: '#73B6EA' },
-      { id: 2, value: '#FFBE15' },
-      { id: 3, value: '#939393' },
+      { value: '#73B6EA' },
+      { value: '#FFBE15' },
+      { value: '#939393' },
     ],
   },
   {
@@ -18,9 +18,9 @@ export default [
     price: '5660',
     image: '/img/toothbrush.jpg',
     color: [
-      { id: 3, value: '#939393' },
-      { id: 4, value: '#8BE000' },
-      { id: 5, value: '#FF6B00' },
+      { value: '#939393' },
+      { value: '#8BE000' },
+      { value: '#FF6B00' },
     ],
   },
   {
@@ -30,9 +30,9 @@ export default [
     price: '21790',
     image: '/img/phone.jpg',
     color: [
-      { id: 3, value: '#939393' },
-      { id: 4, value: '#8BE000' },
-      { id: 5, value: '#FF6B00' },
+      { value: '#939393' },
+      { value: '#8BE000' },
+      { value: '#FF6B00' },
     ],
   },
   {
@@ -42,9 +42,9 @@ export default [
     price: '24690',
     image: '/img/board.jpg',
     color: [
-      { id: 6, value: '#FFF' },
-      { id: 7, value: '#000' },
-      { id: 1, value: '#73B6EA' },
+      { value: '#FFF' },
+      { value: '#000' },
+      { value: '#73B6EA' },
     ],
   },
   {
@@ -54,9 +54,9 @@ export default [
     price: '14960',
     image: '/img/phone-2.jpg',
     color: [
-      { id: 6, value: '#FFF' },
-      { id: 7, value: '#000' },
-      { id: 1, value: '#73B6EA' },
+      { value: '#FFF' },
+      { value: '#000' },
+      { value: '#73B6EA' },
     ],
   },
   {
@@ -66,9 +66,9 @@ export default [
     price: '8960',
     image: '/img/phone-3.jpg',
     color: [
-      { id: 1, value: '#73B6EA' },
-      { id: 2, value: '#FFBE15' },
-      { id: 3, value: '#939393' },
+      { value: '#73B6EA' },
+      { value: '#FFBE15' },
+      { value: '#939393' },
     ],
   },
   {
@@ -78,9 +78,9 @@ export default [
     price: '39900',
     image: '/img/bicycle.jpg',
     color: [
-      { id: 1, value: '#73B6EA' },
-      { id: 2, value: '#FFBE15' },
-      { id: 3, value: '#939393' },
+      { value: '#73B6EA' },
+      { value: '#FFBE15' },
+      { value: '#939393' },
     ],
   },
   {
@@ -90,9 +90,9 @@ export default [
     price: '34900',
     image: '/img/wheels.jpg',
     color: [
-      { id: 3, value: '#939393' },
-      { id: 4, value: '#8BE000' },
-      { id: 5, value: '#FF6B00' },
+      { value: '#939393' },
+      { value: '#8BE000' },
+      { value: '#FF6B00' },
     ],
   },
   {
@@ -102,9 +102,9 @@ export default [
     price: '4990',
     image: '/img/scooter.jpg',
     color: [
-      { id: 3, value: '#939393' },
-      { id: 4, value: '#8BE000' },
-      { id: 5, value: '#FF6B00' },
+      { value: '#939393' },
+      { value: '#8BE000' },
+      { value: '#FF6B00' },
     ],
   },
   {
@@ -114,9 +114,9 @@ export default [
     price: '6690',
     image: '/img/ripstik.jpg',
     color: [
-      { id: 3, value: '#939393' },
-      { id: 4, value: '#8BE000' },
-      { id: 5, value: '#FF6B00' },
+      { value: '#939393' },
+      { value: '#8BE000' },
+      { value: '#FF6B00' },
     ],
   },
   {
@@ -126,9 +126,9 @@ export default [
     price: '16560',
     image: '/img/airpods.jpg',
     color: [
-      { id: 6, value: '#FFF' },
-      { id: 7, value: '#000' },
-      { id: 1, value: '#73B6EA' },
+      { value: '#FFF' },
+      { value: '#000' },
+      { value: '#73B6EA' },
     ],
   },
   {
@@ -138,9 +138,9 @@ export default [
     price: '30690',
     image: '/img/headphones.jpg',
     color: [
-      { id: 6, value: '#FFF' },
-      { id: 7, value: '#000' },
-      { id: 1, value: '#73B6EA' },
+      { value: '#FFF' },
+      { value: '#000' },
+      { value: '#73B6EA' },
     ],
   },
 ];

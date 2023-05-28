@@ -97,6 +97,6 @@
 // import color from '../data/color';
 
 export default {
-  components: 'ColorFilter',
+
 };
 </script>
