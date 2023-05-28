@@ -21,8 +21,35 @@
         :color="color"
         :input-id="'color-' + product.id + '-' + color.id"
         :selected-color="selectedColor"/>
+        </ul>
+      </li>
+</template>
 
-          <!-- <li class="colors__item">
+<script>
+import ColorItem from '@/components/ColorItem.vue';
+import gotoPage from '@/helpers/gotoPage';
+import numberFormat from '@/helpers/numberFormat';
+
+export default {
+  components: {
+    ColorItem,
+  },
+  data() {
+    return {
+      selectedColor: 'selectedColor',
+    };
+  },
+  methods: {
+    gotoPage,
+  },
+  props: ['product'],
+  filters: {
+    numberFormat,
+  },
+};
+</script>
+
+        <!-- <li class="colors__item">
             <label class="colors__label">
               <input
                 class="colors__radio sr-only"
@@ -57,30 +84,3 @@
               <span class="colors__value" style="background-color: #222"> </span>
             </label>
           </li> -->
-        </ul>
-      </li>
-</template>
-
-<script>
-import ColorItem from '@/components/ColorItem.vue';
-import gotoPage from '@/helpers/gotoPage';
-import numberFormat from '@/helpers/numberFormat';
-
-export default {
-  components: {
-    ColorItem,
-  },
-  data() {
-    return {
-      selectedColor: 'selectedColor',
-    };
-  },
-  methods: {
-    gotoPage,
-  },
-  props: ['product'],
-  filters: {
-    numberFormat,
-  },
-};
-</script>

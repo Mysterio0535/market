@@ -21,7 +21,7 @@
 import CardIndicator from './CardIndicator.vue';
 
 export default {
-  name: 'Headers',
+  name: 'AppHeader',
   components: { CardIndicator },
 };
 </script>

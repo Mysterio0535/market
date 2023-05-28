@@ -1,9 +1,9 @@
 import Vue from 'vue';
 import Router from 'vue-router';
-import MainPage from '../page/MainPage';
-import NoFoundPage from '../page/NoFoundPage';
-import ProductPage from '../page/ProductPage';
-import CartPage from '../page/CartPage';
+import MainPage from '@/page/MainPage.vue';
+import NoFoundPage from '@/page/NoFoundPage.vue';
+import ProductPage from '@/page/ProductPage.vue';
+import CartPage from '@/page/CartPage.vue';
 
 Vue.use(Router);
 
