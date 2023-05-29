@@ -53,9 +53,6 @@ export default {
   computed: {
     filterProducts() {
       let filterProducts = products;
-      // {
-      //   colors: [''];
-      // };
       if (this.filterPriceFrom > 0) {
         filterProducts = filterProducts.filter((product) => product.price > this.filterPriceFrom);
       }
@@ -67,9 +64,6 @@ export default {
       if (this.filterCategoryId) {
         filterProducts = filterProducts.filter((product) => product.categoryId === this.filterCategoryId);
       }
-      // if (this.colors ) {
-      //   filterProducts = filterProducts.filter((product) => colors.includes(product.color));
-      // }
       return filterProducts;
     },
     products() {

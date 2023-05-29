@@ -2,21 +2,45 @@
   <fieldset class="form__block">
             <legend class="form__legend">Цвет</legend>
             <ul class="colors">
-              <li class="colors__item" v-for="color in colors" :key="color">
-                <label class="colors__label" for="'color-' + color.id">
+              <li class="colors__item"  v-for="color in colors" :key="color.value" >
+                <label class="colors__label" :for="'color-' + color.id">
 
                   <input class="colors__radio sr-only"
                   type="radio"
                   name="color"
-                  :value="color.id"
-                  v-model="selectedColors"
+                  v-model="selectedColorFilter"
                   :id="'color-' + color.id">
 
-                  <span class="colors__value"> {{ color.value }}
+                   <span class="colors__value"
+                   :style="{ backgroundColor: color.value }">
+
                   </span>
                 </label>
               </li>
-              <li class="colors__item">
+
+            </ul>
+          </fieldset>
+</template>
+
+<script>
+import colors from '../data/color';
+
+export default {
+  data() {
+  return {
+    colors,
+    selectedColorFilter: null,
+  };
+},
+watch: {
+  selectedColorFilter(value) {
+    this.$emit('updateColorFilter', value);
+  },
+},
+};
+</script>
+
+ <!-- <li class="colors__item">
                 <label class="colors__label" for="125">
 
                   <input class="colors__radio sr-only"
@@ -84,19 +108,9 @@
                   type="radio"
                   name="color"
                   value="#000"
-                  id="130">
+                  id="130"
+                  v-model="colorFilter">
 
                   <span class="colors__value" style="background-color: #000;">
                 </span></label>
-              </li>
-            </ul>
-          </fieldset>
-</template>
-
-<script>
-// import color from '../data/color';
-
-export default {
-
-};
-</script>
+              </li> -->
