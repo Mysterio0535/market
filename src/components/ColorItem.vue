@@ -31,6 +31,7 @@ export default {
     },
   },
   computed: {
+
     isSelected() {
       return this.color.value === this.selectedColor;
     },

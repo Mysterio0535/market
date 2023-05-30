@@ -3,9 +3,9 @@
       <div class="footer__wrapper container">
         <ul class="footer__links">
           <li>
-            <a class="footer__link" href="#">
+            <router-link class="footer__link" :to="{name: 'main'}">
               Каталог
-            </a>
+            </router-link>
           </li>
           <li>
             <a class="footer__link" href="tel:88006009009">
@@ -96,8 +96,11 @@
 </template>
 
 <script>
+import router from '@/router';
+
 export default {
-  name: 'AppFooter',
+    name: "AppFooter",
+    components: { router }
 };
 
 </script>

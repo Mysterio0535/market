@@ -42,8 +42,7 @@
             </label>
           </fieldset>
 
-          <ColorFilter @updateColorFilter="updateColorFilter"/>
-
+          <ColorFilter :selectedColor="selectedColorFilter" @updateSelectedColor="updateSelectedColorFilter" />
           <fieldset class="form__block">
             <legend class="form__legend">Объемб в ГБ</legend>
             <ul class="check-list">
@@ -154,7 +153,6 @@
 <script>
 import category from '../data/categories';
 import ColorFilter from './ColorFilter.vue';
-// import colors from '@/data/color';
 
 export default {
   name: 'ProductFilter',
@@ -164,7 +162,7 @@ export default {
       currentPriceFrom: 0,
       currentPriceTo: 0,
       currentCategoryId: 0,
-      selectedColorFilter: null,
+      selectedColorFilter: '',
     };
   },
   props: ['priceFrom', 'priceTo', 'categoryId', 'colorFilter'],
@@ -185,7 +183,7 @@ export default {
       this.currentCategoryId = value;
     },
     colorFilter(value) {
-      this.selectedColorFilter = value;
+      this.selectedColorFilter = value || '';
     },
   },
   methods: {
@@ -194,6 +192,7 @@ export default {
       this.$emit('update:priceTo', this.currentPriceTo);
       this.$emit('update:categoryId', this.currentCategoryId);
       this.$emit('update:colorFilter', this.selectedColorFilter);
+
     },
     reset() {
       this.$emit('update:priceFrom', 0);
@@ -201,10 +200,9 @@ export default {
       this.$emit('update:categoryId', 0);
       this.$emit('update:colorFilter', '');
     },
-    updateColorFilter(color) {
+    updateSelectedColorFilter(color) {
       this.selectedColorFilter = color;
-    }
-
+    },
   },
 };
 </script>

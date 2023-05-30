@@ -35,6 +35,7 @@ import products from '@/data/products';
 import ProductList from '@/components/ProductList.vue';
 import BasePagination from '@/components/BasePagination.vue';
 import ProductFilter from '@/components/ProductFilter.vue';
+// import color from '@/data/color';
 // import colors from '@/components/ColorItem.vue';
 
 export default {
@@ -53,6 +54,7 @@ export default {
   computed: {
     filterProducts() {
       let filterProducts = products;
+      const selectedColors = this.colors;
       if (this.filterPriceFrom > 0) {
         filterProducts = filterProducts.filter((product) => product.price > this.filterPriceFrom);
       }
