@@ -192,7 +192,6 @@ export default {
       this.$emit('update:priceTo', this.currentPriceTo);
       this.$emit('update:categoryId', this.currentCategoryId);
       this.$emit('update:colorFilter', this.selectedColorFilter);
-
     },
     reset() {
       this.$emit('update:priceFrom', 0);

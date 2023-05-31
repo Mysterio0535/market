@@ -144,7 +144,7 @@
 
             <div class="item__row">
               <div class="form__counter">
-                <button type="button" aria-label="Убрать один товар">
+                <button type="button" aria-label="Убрать один товар" @click="decrementProductAmount">
                   <svg width="12" height="12" fill="currentColor">
                     <use xlink:href="#icon-minus"></use>
                   </svg>
@@ -153,7 +153,7 @@
                 <label for="inputInpunt">
 
                 <input type="text" v-model.number="productAmount" id="inputInpunt"></label>
-                <button type="button" aria-label="Добавить один товар">
+                <button type="button" aria-label="Добавить один товар"  @click="incrementProductAmount">
                   <svg width="12" height="12" fill="currentColor">
                     <use xlink:href="#icon-plus"></use>
                   </svg>
@@ -269,6 +269,14 @@ export default {
         'addProductToCart',
         { productId: this.product.id, amount: this.productAmount },
       );
+    },
+    incrementProductAmount() {
+      this.productAmount += 1;
+    },
+    decrementProductAmount() {
+      if (this.productAmount > 1) {
+        this.productAmount -= 1;
+      }
     },
   },
 };

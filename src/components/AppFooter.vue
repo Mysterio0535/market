@@ -96,11 +96,8 @@
 </template>
 
 <script>
-import router from '@/router';
-
 export default {
-    name: "AppFooter",
-    components: { router }
+  name: 'AppFooter',
 };
 
 </script>

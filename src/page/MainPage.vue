@@ -54,7 +54,7 @@ export default {
   computed: {
     filterProducts() {
       let filterProducts = products;
-      const selectedColors = this.colors;
+      // const selectedColors = this.colors;
       if (this.filterPriceFrom > 0) {
         filterProducts = filterProducts.filter((product) => product.price > this.filterPriceFrom);
       }

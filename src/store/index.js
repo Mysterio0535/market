@@ -29,8 +29,8 @@ export default new Vuex.Store({
       }
     },
     deleteCartProduct(state, productId) {
-      state.cartProducts = state.cartProducts.filter((item) => item.productId !== productId)
-    }
+      state.cartProducts = state.cartProducts.filter((item) => item.productId !== productId);
+    },
   },
   incrementCartItem(state, productId) {
     const foundItem = state.cartProducts.find((cartItem) => cartItem.productId === productId);
@@ -49,16 +49,13 @@ export default new Vuex.Store({
   },
   getters: {
     cartDetailProducts(state) {
-      return state.cartProducts.map(item => {
-        return {
-          ...item,
-          product:products.find(p => p.id === item.productId)
-        }
-      });
+      return state.cartProducts.map((item) => ({
+        ...item,
+        product: products.find((p) => p.id === item.productId),
+      }));
     },
     cartTotalPrice(state, getters) {
       return getters.cartDetailProducts.reduce((acc, item) => (item.product.price * item.amount) + acc, 0);
-
-    }
-  }
+    },
+  },
 });
