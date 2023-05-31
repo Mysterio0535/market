@@ -18,9 +18,8 @@
       :color-id.sync="filterColorId"/>
 
       <section class="catalog">
-        <ProductList
-        :products="products"
-        />
+
+        <ProductList :products="products"/>
 
         <BasePagination v-model="page" :count="countProducts" :per-page="productsPerPage" />
 
@@ -35,8 +34,9 @@ import products from '@/data/products';
 import ProductList from '@/components/ProductList.vue';
 import BasePagination from '@/components/BasePagination.vue';
 import ProductFilter from '@/components/ProductFilter.vue';
-// import color from '@/data/color';
-// import colors from '@/components/ColorItem.vue';
+import axios from 'axios';
+
+
 
 export default {
   components: { ProductList, BasePagination, ProductFilter },
@@ -49,6 +49,8 @@ export default {
 
       page: 1,
       productsPerPage: 3,
+
+      productsData: null,
     };
   },
   computed: {
@@ -69,13 +71,31 @@ export default {
       return filterProducts;
     },
     products() {
-      const offset = (this.page - 1) * this.productsPerPage;
-      return this.filterProducts.slice(offset, offset + this.productsPerPage);
+      return this.productsData
+      ? this.productsData.items.map((product) => {
+        return {
+          ...product,
+          image: product.image.file.url
+        }
+      }) : [];
     },
     countProducts() {
-      return this.filterProducts.length;
+      return this.productsData ? this.productsData.pagination.total : 0;
     },
+  },
+  methods: {
+    loadProducts() {
+      axios.get(`https://vue-study.skillbox.cc/api/products?page=${this.page}&limit=${this.productsPerPage}`)
+        .then(product => this.productsData = product.data);
+    },
+  },
+  watch:  {
+    page() {
+      this.loadProducts();
+    },
+  },
+  created(){
+    this.loadProducts();
   },
 };
 </script>
-<!-- #73B6EA', '#FFBE15', '#939393', '#8BE000', '#FF6B00', '#FFF', '#000 -->
