@@ -22,7 +22,7 @@
       </button>
 
       <label for="countInput">
-        <input type="text" v-model.number="item.amount" name="count" id="countInput">
+        <input type="text" v-model.number="localAmount" name="count" id="countInput">
       </label>
 
       <button type="button" aria-label="Добавить один товар" @click="incrementProduct">

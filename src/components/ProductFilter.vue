@@ -208,7 +208,7 @@ export default {
       this.selectedColorFilter = color;
     },
     loadCategories() {
-      axios.get(API_BASE_URL + '/api/productCategories')
+      axios.get(`${API_BASE_URL} + '/api/productCategories`)
         .then((products) => this.categoriesData = products.data);
     },
   },
