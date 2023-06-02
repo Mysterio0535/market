@@ -18,8 +18,8 @@
         :color="color"
         :input-id="`color-${product.id}-${color.value}`"
         :selected-color="selectedColor"
-        @select-color="updateSelectedColor"
-      />
+        @select-color="updateSelectedColor"/>
+
     </ul>
   </li>
 </template>

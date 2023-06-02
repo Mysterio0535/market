@@ -5,7 +5,7 @@
         :id="inputId"
         class="colors__radio sr-only"
         type="radio"
-        :value="color.value"
+        value="color.value"
         :checked="isSelected"
         @change="selectColor"
       />
@@ -15,6 +15,8 @@
 </template>
 
 <script>
+// import MainPage from '../page/MainPage.vue';
+
 export default {
   props: {
     color: {

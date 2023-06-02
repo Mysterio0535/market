@@ -11,15 +11,18 @@
 
     <div class="content__catalog">
 
-      <ProductFilter
-      :price-from.sync="filterPriceFrom"
-      :price-to.sync="filterPriceTo"
-      :category-id.sync="filterCategoryId"
-      :color-id.sync="filterColorId"/>
+      <ProductFilter :price-from.sync="filterPriceFrom" :price-to.sync="filterPriceTo"
+        :category-id.sync="filterCategoryId" :color-id.sync="filterColorId" />
 
       <section class="catalog">
 
-        <ProductList :products="products"/>
+        <div v-if="productsLoading">Загрузка товаров ...</div>
+
+        <div v-if="productsLoadingFailed">Ошибка при зарузке товара :(
+          <button @click.prevent="loadProducts">Попробовать еще раз</button>
+        </div>
+
+        <ProductList :products="products" />
 
         <BasePagination v-model="page" :count="countProducts" :per-page="productsPerPage" />
 
@@ -30,13 +33,12 @@
 </template>
 
 <script>
-import products from '@/data/products';
+// import products from '@/data/products';
 import ProductList from '@/components/ProductList.vue';
 import BasePagination from '@/components/BasePagination.vue';
 import ProductFilter from '@/components/ProductFilter.vue';
 import axios from 'axios';
-
-
+import { API_BASE_URL } from '../config';
 
 export default {
   components: { ProductList, BasePagination, ProductFilter },
@@ -48,36 +50,26 @@ export default {
       filterColorId: '',
 
       page: 1,
-      productsPerPage: 3,
+      productsPerPage: 6,
 
       productsData: null,
+
+      // загрузка товара
+      productsLoading: false,
+      // ошибка при загрузке товара
+      productsLoadingFailed: false,
     };
   },
   computed: {
-    filterProducts() {
-      let filterProducts = products;
-      // const selectedColors = this.colors;
-      if (this.filterPriceFrom > 0) {
-        filterProducts = filterProducts.filter((product) => product.price > this.filterPriceFrom);
-      }
 
-      if (this.filterPriceTo > 0) {
-        filterProducts = filterProducts.filter((product) => product.price < this.filterPriceTo);
-      }
-
-      if (this.filterCategoryId) {
-        filterProducts = filterProducts.filter((product) => product.categoryId === this.filterCategoryId);
-      }
-      return filterProducts;
-    },
     products() {
       return this.productsData
-      ? this.productsData.items.map((product) => {
-        return {
-          ...product,
-          image: product.image.file.url
-        }
-      }) : [];
+        ? this.productsData.items.map((product) => {
+          return {
+            ...product,
+            image: product.image.file.url,
+          };
+        }) : [];
     },
     countProducts() {
       return this.productsData ? this.productsData.pagination.total : 0;
@@ -85,16 +77,44 @@ export default {
   },
   methods: {
     loadProducts() {
-      axios.get(`https://vue-study.skillbox.cc/api/products?page=${this.page}&limit=${this.productsPerPage}`)
-        .then(product => this.productsData = product.data);
+      this.productsLoading = true;
+      this.productsLoadingFailed = false;
+      clearTimeout(this.loadProductsTimer);
+      this.loadProductsTimer = setTimeout(() => {
+        axios.get(API_BASE_URL + '/api/products', {
+          params: {
+            page: this.page,
+            limit: this.productsPerPage,
+            categoryId: this.filterCategoryId,
+            colorId: this.filterColorId,
+            minPrice: this.filterPriceFrom,
+            maxPrice: this.filterPriceTo,
+          },
+        })
+          .then((response) => this.productsData = response.data)
+          .catch(() => this.productsLoadingFailed = true)
+          .then(() => this.productsLoading = false);
+      }, 0);
     },
   },
-  watch:  {
+  watch: {
     page() {
       this.loadProducts();
     },
+    filterPriceFrom() {
+      this.loadProducts();
+    },
+    filterPriceTo() {
+      this.loadProducts();
+    },
+    filterCategoryId() {
+      this.loadProducts();
+    },
+    // filterColorId() {
+    //   this.loadProducts();
+    // }
   },
-  created(){
+  created() {
     this.loadProducts();
   },
 };

@@ -1,21 +1,22 @@
 <template>
-
-   <main class="content container">
+  <main class="content container" v-if="productLoading">Загрузка товаров... </main>
+  <main class="content container" v-else-if="productLoadingFailed">Ошибка при загрузке товара</main>
+  <main class="content container" v-else>
     <div class="content__top">
       <ul class="breadcrumbs">
         <li class="breadcrumbs__item">
-          <router-link class="breadcrumbs__link" :to="{name: 'main'}">
+          <router-link class="breadcrumbs__link" :to="{ name: 'main' }">
             Каталог
           </router-link>
         </li>
         <li class="breadcrumbs__item">
-          <router-link class="breadcrumbs__link" :to="{name: 'main'}">
-            {{category.title}}
+          <router-link class="breadcrumbs__link" :to="{ name: 'main' }">
+            {{ category.title }}
           </router-link>
         </li>
         <li class="breadcrumbs__item">
-          <a class="breadcrumbs__link" >
-            {{product.title}}
+          <a class="breadcrumbs__link">
+            {{ product.title }}
           </a>
         </li>
       </ul>
@@ -24,9 +25,7 @@
     <section class="item">
       <div class="item__pics pics">
         <div class="pics__wrapper">
-          <img width="570" height="570"
-          :src="product.image"
-          :alt="product.title">
+          <img width="570" height="570" :src="product.image" :alt="product.title">
         </div>
 
       </div>
@@ -48,13 +47,8 @@
                 <li class="colors__item">
                   <label class="colors__label" for="333">
 
-                    <input
-                    class="colors__radio sr-only"
-                    type="radio"
-                    name="color-item"
-                    value="blue"
-                    checked=""
-                    id="333">
+                    <input class="colors__radio sr-only"
+                    type="radio" name="color-item" value="blue" checked="" id="333">
 
                     <span class="colors__value" style="background-color: #73B6EA;">
                     </span>
@@ -63,12 +57,7 @@
                 <li class="colors__item">
                   <label class="colors__label" for="334">
 
-                    <input
-                    class="colors__radio sr-only"
-                    type="radio"
-                    name="color-item"
-                    value="yellow"
-                    id="334">
+                    <input class="colors__radio sr-only" type="radio" name="color-item" value="yellow" id="334">
 
                     <span class="colors__value" style="background-color: #FFBE15;">
                     </span>
@@ -76,15 +65,10 @@
                 </li>
                 <li class="colors__item">
                   <label class="colors__label" for="335">
-                    <input
-                    class="colors__radio sr-only"
-                    type="radio"
-                    name="color-item"
-                    value="gray"
-                    id="335">
+                    <input class="colors__radio sr-only" type="radio" name="color-item" value="gray" id="335">
 
                     <span class="colors__value" style="background-color: #939393;">
-                  </span></label>
+                    </span></label>
                 </li>
               </ul>
             </fieldset>
@@ -96,12 +80,7 @@
                 <li class="sizes__item">
                   <label class="sizes__label" for="336">
 
-                    <input
-                    class="sizes__radio sr-only"
-                    type="radio"
-                    name="sizes-item"
-                    value="32"
-                    id="336">
+                    <input class="sizes__radio sr-only" type="radio" name="sizes-item" value="32" id="336">
 
                     <span class="sizes__value">
                       32gb
@@ -111,12 +90,7 @@
                 <li class="sizes__item">
                   <label class="sizes__label" for="337">
 
-                    <input
-                    class="sizes__radio sr-only"
-                    type="radio"
-                    name="sizes-item"
-                    value="64"
-                    id="337">
+                    <input class="sizes__radio sr-only" type="radio" name="sizes-item" value="64" id="337">
 
                     <span class="sizes__value">
                       64gb
@@ -126,13 +100,7 @@
                 <li class="sizes__item">
                   <label class="sizes__label" for="338">
 
-                    <input
-                    class="sizes__radio sr-only"
-                    type="radio"
-                    name="sizes-item"
-                    value="128"
-                    checked=""
-                    id="338">
+                    <input class="sizes__radio sr-only" type="radio" name="sizes-item" value="128" checked="" id="338">
 
                     <span class="sizes__value">
                       128gb
@@ -152,8 +120,8 @@
 
                 <label for="inputInpunt">
 
-                <input type="text" v-model.number="productAmount" id="inputInpunt"></label>
-                <button type="button" aria-label="Добавить один товар"  @click="incrementProductAmount">
+                  <input type="text" v-model.number="productAmount" id="inputInpunt"></label>
+                <button type="button" aria-label="Добавить один товар" @click="incrementProductAmount">
                   <svg width="12" height="12" fill="currentColor">
                     <use xlink:href="#icon-plus"></use>
                   </svg>
@@ -214,7 +182,7 @@
             При этом на мобильное устройство можно установить как фирменное приложение,
             так и различные приложения сторонних разработчиков. Велокомпьютер точно отслеживает
             местоположение, принимая сигнал с целого комплекса спутников. Эта информация
-             позволяет смотреть уже преодоленные маршруты и планировать новые велопрогулки.
+            позволяет смотреть уже преодоленные маршруты и планировать новые велопрогулки.
           </p>
 
           <h3>Дизайн</h3>
@@ -223,32 +191,37 @@
             Велокомпьютер Wahoo ELEMNT BOLT очень компактный.
             Размеры устройства составляют всего 74,6 x 47,3 x 22,1 мм.
             что не превышает габариты смартфона. Корпус гаджета выполнен из черного
-             пластика. На обращенной к пользователю стороне расположен дисплей
-             диагональю 56 мм. На дисплей выводятся координаты и скорость, а также
-             полученная со смартфона и синхронизированных датчиков информация:
-             интенсивность, скорость вращения педалей, пульс и т.д.
-             (датчики не входят в комплект поставки). Корпус велокомпьютера имеет
-             степень защиты от влаги IPX7. Это означает, что устройство не боится
-             пыли, а также выдерживает кратковременное (до 30 минут) погружение в воду на глубину не более 1
-              метра.
+            пластика. На обращенной к пользователю стороне расположен дисплей
+            диагональю 56 мм. На дисплей выводятся координаты и скорость, а также
+            полученная со смартфона и синхронизированных датчиков информация:
+            интенсивность, скорость вращения педалей, пульс и т.д.
+            (датчики не входят в комплект поставки). Корпус велокомпьютера имеет
+            степень защиты от влаги IPX7. Это означает, что устройство не боится
+            пыли, а также выдерживает кратковременное (до 30 минут) погружение в воду на глубину не более 1
+            метра.
           </p>
         </div>
       </div>
     </section>
   </main>
-
 </template>
 
 <script>
-import products from '@/data/products';
-import categories from '@/data/categories';
+// import products from '@/data/products';
+// import categories from '@/data/categories';
 import gotoPage from '../helpers/gotoPage';
 import numberFormat from '../helpers/numberFormat';
+import { API_BASE_URL } from '../config';
+import axios from 'axios';
 
 export default {
   data() {
     return {
       productAmount: 1,
+
+      productData: null,
+      productLoading: false,
+      productLoadingFailed: false,
     };
   },
   filters: {
@@ -256,10 +229,10 @@ export default {
   },
   computed: {
     product() {
-      return products.find((product) => product.id === +this.$route.params.id);
+      return this.productData;
     },
     category() {
-      return categories.find((category) => category.id === this.product.categoryId);
+      return this.productData.category;
     },
   },
   methods: {
@@ -278,46 +251,26 @@ export default {
         this.productAmount -= 1;
       }
     },
+    loadProduct() {
+      this.productLoading = true;
+      this.productLoadingFailed = false;
+      axios.get(API_BASE_URL + '/api/products/' + this.$route.params.id)
+
+        .then((product) => this.productData = product.data)
+        .catch(() => this.productLoadingFailed = true)
+        .then(() => this.productLoading = false);
+    },
+  },
+  // created() {
+  //   this.loadProduct()
+  // },
+  watch: {
+    '$route.params.id': {
+      handler() {
+        this.loadProduct();
+      },
+      immediate: true,
+    },
   },
 };
 </script>
-
-// props: ['pageParams'],
-        <!-- <ul class="pics__list">
-          <li class="pics__item">
-            <a href="" class="pics__link pics__link--current">
-              <img width="98"
-              height="98"
-              src="img/phone-square-1.jpg"
-              srcset="img/phone-square-1@2x.jpg 2x"
-              alt="Название товара">
-            </a>
-          </li>
-          <li class="pics__item">
-            <a href="" class="pics__link">
-              <img width="98"
-              height="98"
-              src="img/phone-square-2.jpg"
-              srcset="img/phone-square-2@2x.jpg 2x"
-              alt="Название товара">
-            </a>
-          </li>
-          <li class="pics__item">
-            <a href="" class="pics__link">
-              <img width="98"
-              height="98"
-              src="img/phone-square-3.jpg"
-              srcset="img/phone-square-3@2x.jpg 2x"
-              alt="Название товара">
-            </a>
-          </li>
-          <li class="pics__item">
-            <a class="pics__link" href="#">
-              <img width="98"
-              height="98"
-              src="img/phone-square-4.jpg"
-              srcset="img/phone-square-4@2x.jpg 2x"
-              alt="Название товара">
-            </a>
-          </li>
-        </ul> -->
