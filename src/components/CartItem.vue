@@ -61,25 +61,27 @@ export default {
       required: true,
     },
   },
-  data() {
-    return {
-      localAmount: this.item.amount,
-    };
+  computed: {
+    localAmount: {
+      get() {
+        return this.item.amount;
+      },
+      set(value) {
+        this.updateCartProductAmount({
+          productId: this.item.productId,
+          amount: value,
+        });
+      },
+    },
   },
   methods: {
     ...mapMutations(['updateCartProductAmount', 'deleteCartProduct']),
     incrementProduct() {
-      this.updateCartProductAmount({
-        productId: this.item.productId,
-        amount: this.item.amount + 1,
-      });
+      this.localAmount += 1;
     },
     decrementProduct() {
-      if (this.item.amount > 1) {
-        this.updateCartProductAmount({
-          productId: this.item.productId,
-          amount: this.item.amount - 1,
-        });
+      if (this.localAmount > 1) {
+        this.localAmount -= 1;
       } else {
         this.deleteCartProduct(this.item.productId);
       }
@@ -89,4 +91,5 @@ export default {
     },
   },
 };
+
 </script>

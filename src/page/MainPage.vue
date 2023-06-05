@@ -33,12 +33,10 @@
 </template>
 
 <script>
-// import products from '@/data/products';
 import ProductList from '@/components/ProductList.vue';
 import BasePagination from '@/components/BasePagination.vue';
 import ProductFilter from '@/components/ProductFilter.vue';
 import axios from 'axios';
-import { API_BASE_URL } from '../config';
 
 export default {
   components: { ProductList, BasePagination, ProductFilter },
@@ -64,13 +62,13 @@ export default {
 
     products() {
       return this.productsData
-        ? this.productsData.items.map((product) => {
-          return {
-            ...product,
-            image: product.image.file.url,
-          };
-        }) : [];
+        ? this.productsData.items.map((product) => ({
+          ...product,
+          image: product.image.file.url,
+        }))
+        : [];
     },
+
     countProducts() {
       return this.productsData ? this.productsData.pagination.total : 0;
     },
@@ -80,22 +78,27 @@ export default {
       this.productsLoading = true;
       this.productsLoadingFailed = false;
       clearTimeout(this.loadProductsTimer);
-      this.loadProductsTimer = setTimeout(() => {
-        axios.get(API_BASE_URL + '/api/products', {
-          params: {
-            page: this.page,
-            limit: this.productsPerPage,
-            categoryId: this.filterCategoryId,
-            colorId: this.filterColorId,
-            minPrice: this.filterPriceFrom,
-            maxPrice: this.filterPriceTo,
-          },
-        })
-          .then((response) => this.productsData = response.data)
-          .catch(() => this.productsLoadingFailed = true)
-          .then(() => this.productsLoading = false);
+      this.loadProductsTimer = setTimeout(async () => {
+        try {
+          const response = await axios.get(`${process.env.VUE_APP_BASE_URL}/api/products`, {
+            params: {
+              page: this.page,
+              limit: this.productsPerPage,
+              categoryId: this.filterCategoryId,
+              colorId: this.filterColorId,
+              minPrice: this.filterPriceFrom,
+              maxPrice: this.filterPriceTo,
+            },
+          });
+          this.productsData = response.data;
+        } catch (error) {
+          this.productsLoadingFailed = true;
+        } finally {
+          this.productsLoading = false;
+        }
       }, 0);
     },
+
   },
   watch: {
     page() {
@@ -110,12 +113,12 @@ export default {
     filterCategoryId() {
       this.loadProducts();
     },
-    // filterColorId() {
-    //   this.loadProducts();
-    // }
   },
   created() {
     this.loadProducts();
   },
 };
 </script>
+// filterColorId() {
+  //   this.loadProducts();
+  // }

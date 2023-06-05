@@ -207,12 +207,9 @@
 </template>
 
 <script>
-// import products from '@/data/products';
-// import categories from '@/data/categories';
+import axios from 'axios';
 import gotoPage from '../helpers/gotoPage';
 import numberFormat from '../helpers/numberFormat';
-import { API_BASE_URL } from '../config';
-import axios from 'axios';
 
 export default {
   data() {
@@ -251,14 +248,19 @@ export default {
         this.productAmount -= 1;
       }
     },
-    loadProduct() {
+
+    async loadProduct() {
       this.productLoading = true;
       this.productLoadingFailed = false;
-      axios.get(API_BASE_URL + '/api/products/' + this.$route.params.id)
 
-        .then((product) => this.productData = product.data)
-        .catch(() => this.productLoadingFailed = true)
-        .then(() => this.productLoading = false);
+      try {
+        const response = await axios.get(`${process.env.VUE_APP_BASE_URL}/api/products/${this.$route.params.id}`);
+        this.productData = response.data;
+      } catch (error) {
+        this.productLoadingFailed = true;
+      } finally {
+        this.productLoading = false;
+      }
     },
   },
   // created() {

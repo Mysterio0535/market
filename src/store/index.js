@@ -2,14 +2,12 @@ import Vue from 'vue';
 import Vuex from 'vuex';
 import products from '@/data/products';
 import axios from 'axios';
-import { API_BASE_URL } from '@/config';
 
 Vue.use(Vuex);
 
 export default new Vuex.Store({
   state: {
-    cartProducts: [{ productId: 1, amount: 2 }],
-
+    cartProducts: [],
     userAccessKey: null,
     cartProductsData: [],
   },
@@ -56,6 +54,18 @@ export default new Vuex.Store({
     updateCartProductsData(state, items) {
       state.cartProductsData = items;
     },
+    syncCartProducts(state) {
+      if (Array.isArray(state.cartProductsData)) {
+        state.cartProducts = state.cartProductsData.map((items) => ({
+          // return {
+          productId: items.product.id,
+          amount: items.quantity,
+          // };
+        }));
+      } else {
+        state.cartProducts = [];
+      }
+    },
   },
 
   getters: {
@@ -75,7 +85,7 @@ export default new Vuex.Store({
   actions: {
     loadCart(context) {
       axios
-        .get(API_BASE_URL + '/api/baskets', {
+        .get(`${process.env.VUE_APP_BASE_URL}/api/baskets`, {
           params: {
             userAccessKey: context.state.userAccessKey,
           },
@@ -86,6 +96,7 @@ export default new Vuex.Store({
             context.commit('updateUserAccessKey', response.data.user.accessKey);
           }
           context.commit('updateCartProductsData', response.data.user.items);
+          context.commit('syncCartProducts');
         });
     },
   },
