@@ -4,10 +4,11 @@
       <img :src="product.image" :alt="product.title" style="object-fit: contain"/>
     </router-link>
     <h3 class="catalog__title">
-      <a href="#">
+      <router-link :to="{name: 'ProductPage', params: {id: product.id}}">
         {{ product.title }}
-      </a>
+      </router-link>
     </h3>
+
     <span class="catalog__price">
       {{ product.price | numberFormat }} ₴
     </span>

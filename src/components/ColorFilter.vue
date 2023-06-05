@@ -4,9 +4,10 @@
     <ul class="colors">
       <li class="colors__item" v-for="color in colors" :key="color.id">
         <label class="colors__label" :for="'color-' + color.id">
-          <input class="colors__radio sr-only" type="radio" name="color" :id="'color-' + color.id" :value="color.value"
-            :checked="selectedColor === color.value" @change="selectColor(color.value)">
-          <span class="colors__value" :style="{ backgroundColor: colors.code }"></span>
+          <input class="colors__radio sr-only"
+          type="radio" name="color" :id="'color-' + color.id"
+          :value="colors.code" :checked="selectedColor === colors.code" @change="selectedColor(colors.code)">
+          <span class="colors__value" :style="{ backgroundColor: color.code }"></span>
         </label>
       </li>
     </ul>
