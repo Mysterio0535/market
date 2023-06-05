@@ -1,5 +1,6 @@
 <template>
-  <li class="cart__item product">
+
+ <li class="cart__item product">
     <div class="product__pic">
       <img :src="item.product.image"
       width="120"

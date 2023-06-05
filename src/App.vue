@@ -1,12 +1,12 @@
 <template>
   <div>
-    <AppHeader/>
+    <AppHeader />
 
-    <router-view/>
+    <router-view />
 
-    <AppFooter/>
+    <AppFooter />
   </div>
-  </template>
+</template>
 
 <script>
 import { mapActions, mapMutations } from 'vuex';
@@ -15,13 +15,18 @@ import AppHeader from './components/AppHeader.vue';
 
 export default {
   components: { AppHeader, AppFooter },
-  created() {
+  async created() {
     const userAccessKey = localStorage.getItem('userAccessKey');
     if (userAccessKey) {
       this.updateUserAccessKey(userAccessKey);
     }
-    this.loadCart();
+    try {
+      await this.loadCart();
+    } catch (error) {
+      alert('Ошибка при загрузке корзины');
+    }
   },
+
   methods: {
     ...mapActions(['loadCart']),
     ...mapMutations(['updateUserAccessKey']),

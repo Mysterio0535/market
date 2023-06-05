@@ -56,10 +56,10 @@ export default new Vuex.Store({
     },
     syncCartProducts(state) {
       if (Array.isArray(state.cartProductsData)) {
-        state.cartProducts = state.cartProductsData.map((items) => ({
+        state.cartProducts = state.cartProductsData.map((item) => ({
           // return {
-          productId: items.product.id,
-          amount: items.quantity,
+          productId: item.product.id,
+          amount: item.quantity,
           // };
         }));
       } else {
@@ -83,21 +83,26 @@ export default new Vuex.Store({
     },
   },
   actions: {
-    loadCart(context) {
-      axios
-        .get(`${process.env.VUE_APP_BASE_URL}/api/baskets`, {
+    async loadCart(context) {
+      try {
+        const response = await axios.get(`${process.env.VUE_APP_BASE_URL}/api/baskets`, {
           params: {
             userAccessKey: context.state.userAccessKey,
           },
-        })
-        .then((response) => {
-          if (!context.state.userAccessKey) {
-            localStorage.setItem('userAccessKey', response.data.user.accessKey);
-            context.commit('updateUserAccessKey', response.data.user.accessKey);
-          }
-          context.commit('updateCartProductsData', response.data.user.items);
-          context.commit('syncCartProducts');
         });
+
+        if (!context.state.userAccessKey) {
+          localStorage.setItem('userAccessKey', response.data.user.accessKey);
+          context.commit('updateUserAccessKey', response.data.user.accessKey);
+        }
+
+        context.commit('updateCartProductsData', response.data.user.items);
+        context.commit('syncCartProducts');
+      } catch (error) {
+        console.error('Ошибка при загрузке корзины:', error);
+        throw error;
+      }
     },
+
   },
 });

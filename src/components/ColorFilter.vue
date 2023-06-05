@@ -2,18 +2,11 @@
   <fieldset class="form__block">
     <legend class="form__legend">Цвет</legend>
     <ul class="colors">
-      <li class="colors__item" v-for="color in colors" :key="color.value">
+      <li class="colors__item" v-for="color in colors" :key="color.id">
         <label class="colors__label" :for="'color-' + color.id">
-          <input
-            class="colors__radio sr-only"
-            type="radio"
-            name="color"
-            :id="'color-' + color.id"
-            :value="color.value"
-            :checked="selectedColor === color.value"
-            @change="selectColor(color.value)"
-          >
-          <span class="colors__value" :style="{ backgroundColor: color.value }"></span>
+          <input class="colors__radio sr-only" type="radio" name="color" :id="'color-' + color.id" :value="color.value"
+            :checked="selectedColor === color.value" @change="selectColor(color.value)">
+          <span class="colors__value" :style="{ backgroundColor: colors.code }"></span>
         </label>
       </li>
     </ul>
@@ -21,7 +14,7 @@
 </template>
 
 <script>
-import colors from '../data/color';
+import axios from 'axios';
 
 export default {
   props: {
@@ -32,7 +25,7 @@ export default {
   },
   data() {
     return {
-      colors,
+      colors: [],
     };
   },
   methods: {
@@ -43,81 +36,17 @@ export default {
         this.$emit('updateSelectedColor', colorValue);
       }
     },
+    async loadColors() {
+      try {
+        const response = await axios.get(`${process.env.VUE_APP_BASE_URL}/api/colors`);
+        this.colors = response.data;
+      } catch (error) {
+        console.error('Не удалось загрузить цвета:', error);
+      }
+    },
+  },
+  created() {
+    this.loadColors();
   },
 };
 </script>
-
- <!-- <li class="colors__item">
-                <label class="colors__label" for="125">
-
-                  <input class="colors__radio sr-only"
-                  type="radio"
-                  name="color"
-                  value="#FFBE15"
-                  id="125">
-
-                  <span class="colors__value" style="background-color: #FFBE15;">
-                  </span>
-                </label>
-              </li>
-              <li class="colors__item">
-                <label class="colors__label" for="126">
-
-                  <input class="colors__radio sr-only"
-                  type="radio"
-                  name="color"
-                  value="#939393"
-                  id="126">
-
-                  <span class="colors__value" style="background-color: #939393;">
-                </span></label>
-              </li>
-              <li class="colors__item">
-                <label class="colors__label" for="127">
-
-                  <input class="colors__radio sr-only"
-                  type="radio"
-                  name="color"
-                  value="#8BE000"
-                  id="127">
-
-                  <span class="colors__value" style="background-color: #8BE000;">
-                </span></label>
-              </li>
-              <li class="colors__item">
-                <label class="colors__label" for="128">
-
-                  <input class="colors__radio sr-only"
-                  type="radio"
-                  name="color"
-                  value="#FF6B00"
-                  id="128">
-
-                  <span class="colors__value" style="background-color: #FF6B00;">
-                </span></label>
-              </li>
-              <li class="colors__item">
-                <label class="colors__label" for="129">
-
-                  <input class="colors__radio sr-only"
-                  type="radio"
-                  name="color"
-                  value="#FFF"
-                  id="129">
-
-                  <span class="colors__value" style="background-color: #FFF;">
-                </span></label>
-              </li>
-              <li class="colors__item">
-                <label class="colors__label" for="130">
-
-                  <input class="colors__radio sr-only"
-                  type="radio"
-                  name="color"
-                  value="#000"
-                  id="130"
-                  v-model="colorFilter">
-
-                  <span class="colors__value" style="background-color: #000;">
-                </span></label>
-              </li> -->

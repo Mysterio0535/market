@@ -24,11 +24,9 @@
         <label class="form__label form__label--select" for="123">
           <select class="form__select" type="text" name="category" v-model="currentCategoryId" id="123">
             <option value="0">Все категории</option>
-
             <option :value="category.id" v-for="category in categories" :key="category.id">
               {{ category.title }}
             </option>
-
           </select>
         </label>
       </fieldset>
@@ -133,11 +131,11 @@ export default {
       selectedColorFilter: '',
 
       categoriesData: null,
+
     };
   },
   props: ['priceFrom', 'priceTo', 'categoryId', 'colorFilter'],
   computed: {
-
     categories() {
       return this.categoriesData ? this.categoriesData.items : [];
     },
@@ -172,17 +170,36 @@ export default {
     updateSelectedColorFilter(color) {
       this.selectedColorFilter = color;
     },
-
     async loadCategories() {
       try {
         const response = await axios.get(`${process.env.VUE_APP_BASE_URL}/api/productCategories`);
         this.categoriesData = response.data;
       } catch (error) {
         console.error('An error occurred while loading categories:', error);
-        // Обработка ошибки, например, установка флага ошибки
-        this.categoriesLoadingFailed = true;
       }
     },
   },
+  created() {
+    this.loadCategories();
+  },
 };
 </script>
+
+<!-- async loadCategories() {
+  try {
+    const response = await axios.get(`${process.env.VUE_APP_BASE_URL}/api/productCategories`);
+    this.categories = response.data;
+  } catch (error) {
+    console.error('Не удалось загрузить категории:', error);
+  }
+},
+async loadColors() {
+  try {
+    const response = await axios.get(`${process.env.VUE_APP_BASE_URL}/api/colors`);
+    this.colors = response.data;
+  } catch (error) {
+    console.error('Не удалось загрузить цвета:', error);
+  }
+},
+    this.loadCategories();
+    this.loadColors(); -->

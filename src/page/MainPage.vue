@@ -5,29 +5,26 @@
         Каталог
       </h1>
       <span class="content__info">
-        152 товара
+        {{ countProducts }} товара
       </span>
     </div>
 
     <div class="content__catalog">
-
       <ProductFilter :price-from.sync="filterPriceFrom" :price-to.sync="filterPriceTo"
-        :category-id.sync="filterCategoryId" :color-id.sync="filterColorId" />
+      :category-id.sync="filterCategoryId" :color-id.sync="filterColorId"/>
 
       <section class="catalog">
-
         <div v-if="productsLoading">Загрузка товаров ...</div>
 
-        <div v-if="productsLoadingFailed">Ошибка при зарузке товара :(
+        <div v-if="productsLoadingFailed">
+          Ошибка при загрузке товара :(
           <button @click.prevent="loadProducts">Попробовать еще раз</button>
         </div>
 
         <ProductList :products="products" />
 
         <BasePagination v-model="page" :count="countProducts" :per-page="productsPerPage" />
-
       </section>
-
     </div>
   </main>
 </template>
@@ -52,14 +49,12 @@ export default {
 
       productsData: null,
 
-      // загрузка товара
       productsLoading: false,
-      // ошибка при загрузке товара
       productsLoadingFailed: false,
+
     };
   },
   computed: {
-
     products() {
       return this.productsData
         ? this.productsData.items.map((product) => ({
@@ -68,37 +63,33 @@ export default {
         }))
         : [];
     },
-
     countProducts() {
       return this.productsData ? this.productsData.pagination.total : 0;
     },
   },
   methods: {
-    loadProducts() {
+    async loadProducts() {
       this.productsLoading = true;
       this.productsLoadingFailed = false;
-      clearTimeout(this.loadProductsTimer);
-      this.loadProductsTimer = setTimeout(async () => {
-        try {
-          const response = await axios.get(`${process.env.VUE_APP_BASE_URL}/api/products`, {
-            params: {
-              page: this.page,
-              limit: this.productsPerPage,
-              categoryId: this.filterCategoryId,
-              colorId: this.filterColorId,
-              minPrice: this.filterPriceFrom,
-              maxPrice: this.filterPriceTo,
-            },
-          });
-          this.productsData = response.data;
-        } catch (error) {
-          this.productsLoadingFailed = true;
-        } finally {
-          this.productsLoading = false;
-        }
-      }, 0);
-    },
 
+      try {
+        const response = await axios.get(`${process.env.VUE_APP_BASE_URL}/api/products`, {
+          params: {
+            page: this.page,
+            limit: this.productsPerPage,
+            categoryId: this.filterCategoryId,
+            colorId: this.filterColorId,
+            minPrice: this.filterPriceFrom,
+            maxPrice: this.filterPriceTo,
+          },
+        });
+        this.productsData = response.data;
+      } catch (error) {
+        this.productsLoadingFailed = true;
+      } finally {
+        this.productsLoading = false;
+      }
+    },
   },
   watch: {
     page() {
@@ -119,6 +110,3 @@ export default {
   },
 };
 </script>
-// filterColorId() {
-  //   this.loadProducts();
-  // }
