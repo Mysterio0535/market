@@ -31,7 +31,8 @@
         </label>
       </fieldset>
 
-      <ColorFilter :selectedColor="selectedColorFilter" @updateSelectedColor="updateSelectedColorFilter" />
+      <ColorFilter v-model="selectedColorFilter" />
+
       <fieldset class="form__block">
         <legend class="form__legend">Объемб в ГБ</legend>
         <ul class="check-list">
@@ -159,7 +160,7 @@ export default {
       this.$emit('update:priceFrom', this.currentPriceFrom);
       this.$emit('update:priceTo', this.currentPriceTo);
       this.$emit('update:categoryId', this.currentCategoryId);
-      this.$emit('update:colorFilter', this.selectedColorFilter);
+      // this.$emit('update:colorFilter', colorFilter);
     },
     reset() {
       this.$emit('update:priceFrom', 0);
@@ -169,6 +170,7 @@ export default {
     },
     updateSelectedColorFilter(color) {
       this.selectedColorFilter = color;
+      this.$emit('update:colorFilter', color);
     },
     async loadCategories() {
       try {

@@ -12,6 +12,10 @@ export default new Vuex.Store({
     cartProductsData: [],
   },
   mutations: {
+    // resetCart(state) {
+    //   state.cartProducts = {};
+    //   state.cartProductsData = {};
+    // },
     addProductToCart(state, { productId, amount }) {
       const foundItem = state.cartProducts.find((cartItem) => cartItem.productId === productId);
       if (foundItem) {
@@ -71,8 +75,10 @@ export default new Vuex.Store({
   getters: {
     cartDetailProducts(state) {
       return state.cartProducts.map((item) => ({
+        // const productsBasket = state.cartProductsData.find(p = p.product.id === item.productId).product
         ...item,
         product: products.find((p) => p.id === item.productId),
+        // productsBasket
       }));
     },
     cartTotalPrice(state, getters) {

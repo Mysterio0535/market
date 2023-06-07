@@ -1,22 +1,16 @@
 <template>
   <li class="colors__item">
     <label class="colors__label form__label--color" :for="inputId">
-      <input
-        :id="inputId"
-        class="colors__radio sr-only"
-        type="radio"
-        value="color.value"
-        :checked="isSelected"
-        @change="selectColor"
-      />
-      <span :style="{ backgroundColor: color.value }" class="colors__value"></span>
+      <input :id="inputId" class="colors__radio sr-only" type="radio" :value="color.id" :checked="isSelected"
+        @change="selectColor" />
+      <span class="colors__value" :style="{ backgroundColor: color.code }">
+        <!-- {{ color.code }} -->
+      </span>
     </label>
   </li>
 </template>
 
 <script>
-// import MainPage from '../page/MainPage.vue';
-
 export default {
   props: {
     color: {
@@ -27,20 +21,19 @@ export default {
       type: String,
       required: true,
     },
-    selectedColor: {
-      type: String,
+    selectedColorId: {
+      type: Number,
       required: true,
     },
   },
   computed: {
-
     isSelected() {
-      return this.color.value === this.selectedColor;
+      return this.color.id === this.selectedColorId;
     },
   },
   methods: {
     selectColor() {
-      this.$emit('select-color', this.color.value);
+      this.$emit('select-color', this.color.id);
     },
   },
 };

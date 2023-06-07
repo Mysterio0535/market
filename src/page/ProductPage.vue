@@ -43,32 +43,16 @@
             <fieldset class="form__block">
               <legend class="form__legend">Цвет:</legend>
               <ul class="colors">
-                <li class="colors__item">
-                  <label class="colors__label" for="333">
-
-                    <input class="colors__radio sr-only"
-                    type="radio" name="color-item" value="blue" checked="" id="333">
-
-                    <span class="colors__value" style="background-color: #73B6EA;">
-                    </span>
-                  </label>
-                </li>
-                <li class="colors__item">
-                  <label class="colors__label" for="334">
-
-                    <input class="colors__radio sr-only" type="radio" name="color-item" value="yellow" id="334">
-
-                    <span class="colors__value" style="background-color: #FFBE15;">
-                    </span>
-                  </label>
-                </li>
-                <li class="colors__item">
-                  <label class="colors__label" for="335">
-                    <input class="colors__radio sr-only" type="radio" name="color-item" value="gray" id="335">
-
-                    <span class="colors__value" style="background-color: #939393;">
-                    </span></label>
-                </li>
+                <ul class="colors">
+                <ColorItem
+                  v-for="color in product.colors"
+                  :key="color.id"
+                  :color="color"
+                  :inputId="'color-' + color.id"
+                  :selected-color-id="selectedColorId"
+                  @select-color="updateSelectedColor"
+                />
+              </ul>
               </ul>
             </fieldset>
 
@@ -207,10 +191,14 @@
 
 <script>
 import axios from 'axios';
-import gotoPage from '../helpers/gotoPage';
+import ColorItem from '@/components/ColorItem.vue';
 import numberFormat from '../helpers/numberFormat';
+import gotoPage from '../helpers/gotoPage';
 
 export default {
+  components: {
+    ColorItem,
+  },
   data() {
     return {
       productAmount: 1,
@@ -218,6 +206,8 @@ export default {
       productData: null,
       productLoading: false,
       productLoadingFailed: false,
+
+      selectedColorId: null,
     };
   },
   filters: {

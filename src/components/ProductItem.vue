@@ -1,10 +1,10 @@
 <template>
   <li class="catalog__item">
-    <router-link class="catalog__pic" :to="{name: 'ProductPage', params: {id: product.id}}">
-      <img :src="product.image" :alt="product.title" style="object-fit: contain"/>
+    <router-link class="catalog__pic" :to="{ name: 'ProductPage', params: { id: product.id } }">
+      <img :src="product.image" :alt="product.title" style="object-fit: contain" />
     </router-link>
     <h3 class="catalog__title">
-      <router-link :to="{name: 'ProductPage', params: {id: product.id}}">
+      <router-link :to="{ name: 'ProductPage', params: { id: product.id } }">
         {{ product.title }}
       </router-link>
     </h3>
@@ -12,15 +12,16 @@
     <span class="catalog__price">
       {{ product.price | numberFormat }} ₴
     </span>
+
     <ul class="colors colors--black">
       <ColorItem
-        v-for="color in product.color"
-        :key="color.value"
+        v-for="color in product.colors"
+        :key="color.id"
         :color="color"
-        :input-id="`color-${product.id}-${color.value}`"
-        :selected-color="selectedColor"
-        @select-color="updateSelectedColor"/>
-
+        :input-id="`color-${product.id}-${color.id}`"
+        :selected-color-id="selectedColorId"
+        @select-color="updateSelectedColor"
+      />
     </ul>
   </li>
 </template>
@@ -33,15 +34,15 @@ export default {
   components: {
     ColorItem,
   },
-  props: ['product'],
+  props: ['product', 'colorFilter'],
   data() {
     return {
-      selectedColor: '',
+      selectedColorId: 0,
     };
   },
   methods: {
-    updateSelectedColor(color) {
-      this.selectedColor = color;
+    updateSelectedColor(colorId) {
+      this.selectedColorId = colorId;
     },
   },
   filters: {
