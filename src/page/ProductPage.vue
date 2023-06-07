@@ -202,11 +202,9 @@ export default {
   data() {
     return {
       productAmount: 1,
-
       productData: null,
       productLoading: false,
       productLoadingFailed: false,
-
       selectedColorId: null,
     };
   },
@@ -224,10 +222,7 @@ export default {
   methods: {
     gotoPage,
     addToCart() {
-      this.$store.commit(
-        'addProductToCart',
-        { productId: this.product.id, amount: this.productAmount },
-      );
+      this.$store.commit('addProductToCart', { productId: this.product.id, amount: this.productAmount });
     },
     incrementProductAmount() {
       this.productAmount += 1;
@@ -237,7 +232,9 @@ export default {
         this.productAmount -= 1;
       }
     },
-
+    updateSelectedColor(colorId) {
+      this.selectedColorId = colorId;
+    },
     async loadProduct() {
       this.productLoading = true;
       this.productLoadingFailed = false;
@@ -252,9 +249,6 @@ export default {
       }
     },
   },
-  // created() {
-  //   this.loadProduct()
-  // },
   watch: {
     '$route.params.id': {
       handler() {

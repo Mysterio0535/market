@@ -1,5 +1,5 @@
 <template>
-  <label class="form__label" :for="`${id}-field`">
+  <label class="form__label" :for="`${title}-field`">
     <slot></slot>
     <span class="form__value">{{ title }}</span>
     <span class="form__error" v-if="error">{{ error }}</span>
@@ -10,9 +10,6 @@
 export default {
   props: ['title', 'error'],
   computed: {
-    id() {
-      return this.id;
-    },
   },
 };
 </script>

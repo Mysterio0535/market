@@ -24,6 +24,7 @@ export default {
     selectedColorId: {
       type: Number,
       required: true,
+      default: 0,
     },
   },
   computed: {
